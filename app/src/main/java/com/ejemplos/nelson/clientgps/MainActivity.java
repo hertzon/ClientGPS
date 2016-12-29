@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
 //import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -41,16 +42,21 @@ public class MainActivity extends Activity {
     private AlarmManager alarmManager;
     private Intent gpsTrackerIntent;
     private PendingIntent pendingIntent;
+    public String imei=null;
+    public static Context contextOfApplication;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        contextOfApplication = getApplicationContext();
         //getSupportActionBar().setDisplayShowHomeEnabled(true);
         //getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         //getSupportActionBar().setDisplayUseLogoEnabled(true);
+        TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        imei = tm.getDeviceId();
+        Log.d(TAG,"IMEI: "+imei);
 
         defaultUploadWebsite = getString(R.string.default_upload_website);
 
@@ -263,6 +269,9 @@ public class MainActivity extends Activity {
 
         displayUserSettings();
         setTrackingButtonState();
+    }
+    public static Context getContextOfApplication(){
+        return contextOfApplication;
     }
 
     @Override
