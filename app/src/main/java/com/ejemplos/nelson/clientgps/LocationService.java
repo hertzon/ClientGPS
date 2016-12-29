@@ -136,7 +136,7 @@ public class LocationService extends Service implements
         Log.i(TAG,"Trama pos: "+trama_pos);
 
 
-        if (isNetwork()){
+        if (true){
             Log.i(TAG,"Hay red!!!");
             new SendServer().execute("##"+"imei:"+imei+','+"A;");
             new SendServer().execute(trama_pos);
@@ -354,20 +354,20 @@ public class LocationService extends Service implements
 
         return utcTime;
     }
-    public  boolean isNetwork(){
-        //Determinamos si hay conectividad de red....
-        boolean isConnected=false;
-        Context applicationContext=MainActivity.getContextOfApplication();
-        ConnectivityManager cm =
-                (ConnectivityManager)applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        if (activeNetwork!=null){
-            isConnected = activeNetwork.isConnected();
-        }else {
-            isConnected=false;
-        }
-        return isConnected;
-    }
+//    public  boolean isNetwork(){
+//        //Determinamos si hay conectividad de red....
+//        boolean isConnected=false;
+//        Context applicationContext=MainActivity.getContextOfApplication();
+//        ConnectivityManager cm =
+//                (ConnectivityManager)applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+//        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+//        if (activeNetwork!=null){
+//            isConnected = activeNetwork.isConnected();
+//        }else {
+//            isConnected=false;
+//        }
+//        return isConnected;
+//    }
 
     public class SendServer extends AsyncTask<String, String, Boolean> {
 
