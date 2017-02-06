@@ -2,11 +2,14 @@ package com.ejemplos.nelson.clientgps;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.SystemClock;
 //import android.support.v7.app.AppCompatActivity;
@@ -26,7 +29,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import java.util.UUID;
 
 public class MainActivity extends Activity {
-    private static final String TAG = "GpsTrackerActivity";
+    private static final String TAG = "GPSTrax";
 
     // use the websmithing defaultUploadWebsite for testing and then check your
     // location with your browser here: https://www.websmithing.com/gpstracker/displaymap.php
@@ -44,6 +47,7 @@ public class MainActivity extends Activity {
     private PendingIntent pendingIntent;
     public String imei=null;
     public static Context contextOfApplication;
+    public String cuenta=null;
 
 
     @Override
@@ -56,7 +60,20 @@ public class MainActivity extends Activity {
         //getSupportActionBar().setDisplayUseLogoEnabled(true);
         TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
         imei = tm.getDeviceId();
-        Log.d(TAG,"IMEI: "+imei);
+        Log.d(TAG,"Starting Aplication GPSTrax.....");
+        Log.d(TAG,"Created by Nelson Rodriguez 01/02/2017");
+        Log.d(TAG,"IMEI equipo: "+imei);
+
+        Log.d(TAG,"Revisando si esta habilitado el posicionamiento...");
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            Log.d(TAG,"GPS esta activo!!!");
+            //Toast.makeText(this, "GPS is Enabled in your devide", Toast.LENGTH_SHORT).show();
+        }else{
+            Log.d(TAG,"GPS no esta activo!!!");
+            Toast.makeText(getApplicationContext(),"Debe habilitar el GPS!!!",Toast.LENGTH_SHORT).show();
+            showGPSDisabledAlertToUser();
+        }
 
         defaultUploadWebsite = getString(R.string.default_upload_website);
 
@@ -68,8 +85,20 @@ public class MainActivity extends Activity {
 
         SharedPreferences sharedPreferences = this.getSharedPreferences("com.websmithing.gpstracker.prefs", Context.MODE_PRIVATE);
         currentlyTracking = sharedPreferences.getBoolean("currentlyTracking", false);
+        cuenta=sharedPreferences.getString("currentlyTracking", null);
+        Log.d(TAG,"Cuenta inicio: "+cuenta);
+
+        if (cuenta==null){
+            Log.d(TAG,"Abriendo activity de registro");
+            Intent i=new Intent(this,Register.class);
+            startActivity(i);
+        }
+
+
+        Log.d(TAG,"currentlyTracking 1: "+currentlyTracking);
 
         boolean firstTimeLoadingApp = sharedPreferences.getBoolean("firstTimeLoadingApp", true);
+        Log.d(TAG,"firstTimeLoadingApp 1: "+firstTimeLoadingApp);
         if (firstTimeLoadingApp) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("firstTimeLoadingApp", false);
@@ -91,6 +120,29 @@ public class MainActivity extends Activity {
                 trackLocation(view);
             }
         });
+    }
+
+    private void showGPSDisabledAlertToUser() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("GPS esta deshabilitado, para el funcionamiento de esta aplicacion debe habilitarlo!")
+                .setCancelable(false)
+                .setPositiveButton("Habilitar el GPS",
+                        new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int id){
+                                Intent callGPSSettingIntent = new Intent(
+                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                startActivity(callGPSSettingIntent);
+                            }
+                        });
+        alertDialogBuilder.setNegativeButton("Cancelar",
+                new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int id){
+                        dialog.cancel();
+                        finish();
+                    }
+                });
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
     }
 
     private void saveInterval() {
@@ -276,6 +328,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onStop() {
+        Log.d(TAG,"onStop");
         super.onStop();
     }
 }

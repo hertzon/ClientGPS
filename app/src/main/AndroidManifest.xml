@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 
     <application
         android:allowBackup="true"
@@ -33,9 +33,12 @@
         <receiver
             android:name=".GpsTrackerBootReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
-        <service android:name=".LocationService">
-        </service>
+            android:exported="true" />
+
+        <service android:name=".LocationService" />
+
+        <activity android:name=".Login" />
+        <activity android:name=".Register"></activity>
     </application>
 
 </manifest>
