@@ -47,7 +47,11 @@ public class MainActivity extends Activity {
     private PendingIntent pendingIntent;
     public String imei=null;
     public static Context contextOfApplication;
-    public String cuenta=null;
+    public boolean registroHecho=false;
+    public String strNombreEequipo=null;
+    public String strCorreoCuenta=null;
+    public String strUsuario=null;
+    public String strClave=null;
 
 
     @Override
@@ -85,14 +89,30 @@ public class MainActivity extends Activity {
 
         SharedPreferences sharedPreferences = this.getSharedPreferences("com.websmithing.gpstracker.prefs", Context.MODE_PRIVATE);
         currentlyTracking = sharedPreferences.getBoolean("currentlyTracking", false);
-        cuenta=sharedPreferences.getString("currentlyTracking", null);
-        Log.d(TAG,"Cuenta inicio: "+cuenta);
+        registroHecho=sharedPreferences.getBoolean("registroHecho", false);
+        Log.d(TAG,"registroHecho inicio: "+registroHecho);
 
-        if (cuenta==null){
+        //registroHecho=false;
+        if (!registroHecho){
             Log.d(TAG,"Abriendo activity de registro");
             Intent i=new Intent(this,Register.class);
             startActivity(i);
+        }else {
+            Log.d(TAG,"Leyendo datos de usuario e imei:");
+            strNombreEequipo=sharedPreferences.getString("nombreEquipo",null);
+            strCorreoCuenta=sharedPreferences.getString("correoCuenta",null);
+            strUsuario=sharedPreferences.getString("usuario",null);
+            strClave=sharedPreferences.getString("clave",null);
+            imei=sharedPreferences.getString("imei",null);
+            Log.d(TAG,"strNombreEequipo: "+strNombreEequipo);
+            Log.d(TAG,"strCorreoCuenta: "+strCorreoCuenta);
+            Log.d(TAG,"strUsuario: "+strUsuario);
+            Log.d(TAG,"strClave: "+strClave);
+            Log.d(TAG,"imei: "+imei);
+
+
         }
+
 
 
         Log.d(TAG,"currentlyTracking 1: "+currentlyTracking);
@@ -313,11 +333,32 @@ public class MainActivity extends Activity {
             trackingButton.setText(R.string.tracking_is_off);
         }
     }
-
+    public String getImei(){
+        return imei;
+    }
     @Override
     public void onResume() {
-        Log.d(TAG, "onResume");
+        Log.d(TAG, "onResume MainActivity");
         super.onResume();
+        Log.d(TAG,"Leyendo datos de usuario e imei:");
+        SharedPreferences sharedPreferences = this.getSharedPreferences("com.websmithing.gpstracker.prefs", Context.MODE_PRIVATE);
+        strNombreEequipo=sharedPreferences.getString("nombreEquipo",null);
+        strCorreoCuenta=sharedPreferences.getString("correoCuenta",null);
+        strUsuario=sharedPreferences.getString("usuario",null);
+        strClave=sharedPreferences.getString("clave",null);
+        imei=sharedPreferences.getString("imei",null);
+        Log.d(TAG,"strNombreEequipo: "+strNombreEequipo);
+        Log.d(TAG,"strCorreoCuenta: "+strCorreoCuenta);
+        Log.d(TAG,"strUsuario: "+strUsuario);
+        Log.d(TAG,"strClave: "+strClave);
+        Log.d(TAG,"imei: "+imei);
+        registroHecho=sharedPreferences.getBoolean("registroHecho", false);
+
+        if (registroHecho){
+            Log.d(TAG,"Arrancando intent GpsTrackerAlarmReceiver");
+            this.startService(new Intent(this, LocationService.class));
+        }
+
 
         displayUserSettings();
         setTrackingButtonState();
@@ -328,7 +369,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onStop() {
-        Log.d(TAG,"onStop");
+        Log.d(TAG,"onStop MainActivity");
         super.onStop();
     }
 }

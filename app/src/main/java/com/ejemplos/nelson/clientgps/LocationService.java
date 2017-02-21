@@ -43,7 +43,7 @@ public class LocationService extends Service implements
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
-    private static final String TAG = "LocationService";
+    private static final String TAG = "GPSTrax";
     public static TcpClient mTcpClient;
     public static final String SERVER_IP = "104.236.203.72"; //your computer IP address
     public static final int SERVER_PORT = 31272;
@@ -114,9 +114,10 @@ public class LocationService extends Service implements
         Log.i(TAG,"velocidadmps: "+velocidadmps);
         Log.i(TAG,"velocidadkph: "+velocidadkph);
 
-        TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        String imei = tm.getDeviceId();
-        Log.i(TAG,"imei: "+imei);
+
+        SharedPreferences sharedPreferences = this.getSharedPreferences("com.websmithing.gpstracker.prefs", Context.MODE_PRIVATE);
+        String imei=sharedPreferences.getString("imei",null);
+        Log.i(TAG,"imei from shared preferences: "+imei);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //String timestamp = sdf.format(new Date());
@@ -132,7 +133,8 @@ public class LocationService extends Service implements
         String minuto=s.substring(14, 16);
         String segundo=s.substring(17, 19);
 
-        String trama_pos="imei:"+imei+','+"tracker"+','+ano+mes+dia+hora+minuto+','+','+'F'+','+hora+minuto+segundo+".000"+','+'A'+','+coordenadas+','+velocidadkph+','+"0"+';';
+        //String trama_pos="imei:"+imei+','+"tracker"+','+ano+mes+dia+hora+minuto+','+','+'F'+','+hora+minuto+segundo+".000"+','+'A'+','+coordenadas+','+velocidadkph+','+"0"+';';
+        String trama_pos="imei:"+imei+','+"tracker"+','+ano+mes+dia+hora+minuto+','+','+'F'+','+hora+minuto+segundo+".000"+','+'A'+','+coordenadas+','+velocidadkph+','+bearing+';';
         Log.i(TAG,"Trama pos: "+trama_pos);
 
 
@@ -140,22 +142,6 @@ public class LocationService extends Service implements
             Log.i(TAG,"Hay red!!!");
             new SendServer().execute("##"+"imei:"+imei+','+"A;");
             new SendServer().execute(trama_pos);
-//            if (mTcpClient==null){
-//                new ConnectTask().execute("");
-//                if (mTcpClient==null){
-//                    Log.i(TAG,"mTcpClient es null :(");
-//                }
-//
-//                try {
-//                    mTcpClient.sendMessage("##"+"imei:"+imei+','+"A;");
-//                    mTcpClient.sendMessage(trama_pos);
-//                    mTcpClient.stopClient();
-//                    Thread.sleep(200);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
         }else {
             Log.i(TAG,"No Hay red!!!");
         }
@@ -172,7 +158,7 @@ public class LocationService extends Service implements
         dateFormat.setTimeZone(TimeZone.getDefault());
         Date date = new Date(location.getTime());
 
-        SharedPreferences sharedPreferences = this.getSharedPreferences("com.websmithing.gpstracker.prefs", Context.MODE_PRIVATE);
+        sharedPreferences = this.getSharedPreferences("com.websmithing.gpstracker.prefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         float totalDistanceInMeters = sharedPreferences.getFloat("totalDistanceInMeters", 0f);
@@ -230,19 +216,20 @@ public class LocationService extends Service implements
         requestParams.put("direction",  Integer.toString(direction.intValue()));
 
         final String uploadWebsite = sharedPreferences.getString("defaultUploadWebsite", defaultUploadWebsite);
-
-        LoopjHttpClient.get(uploadWebsite, requestParams, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody) {
-                LoopjHttpClient.debugLoopJ(TAG, "sendLocationDataToWebsite - success", uploadWebsite, requestParams, responseBody, headers, statusCode, null);
-                stopSelf();
-            }
-            @Override
-            public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] errorResponse, Throwable e) {
-                LoopjHttpClient.debugLoopJ(TAG, "sendLocationDataToWebsite - failure", uploadWebsite, requestParams, errorResponse, headers, statusCode, e);
-                stopSelf();
-            }
-        });
+        stopSelf();
+//
+//        LoopjHttpClient.get(uploadWebsite, requestParams, new AsyncHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody) {
+//                LoopjHttpClient.debugLoopJ(TAG, "sendLocationDataToWebsite - success", uploadWebsite, requestParams, responseBody, headers, statusCode, null);
+//                stopSelf();
+//            }
+//            @Override
+//            public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] errorResponse, Throwable e) {
+//                LoopjHttpClient.debugLoopJ(TAG, "sendLocationDataToWebsite - failure", uploadWebsite, requestParams, errorResponse, headers, statusCode, e);
+//                stopSelf();
+//            }
+//        });
     }
 
     @Override

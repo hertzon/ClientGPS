@@ -17,6 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
@@ -28,4 +29,9 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.google.android.gms:play-services-location:9.8.0'
     compile 'com.loopj.android:android-async-http:1.4.9'
+    compile files('libs/httpclient-4.4.jar')
+    //compile files('libs/httpcore-4.4.jar')
+    //compile files('libs/httpmime-4.3.6.jar')
+
+
 }
