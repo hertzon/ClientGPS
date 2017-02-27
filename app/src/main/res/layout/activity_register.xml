@@ -1,4 +1,3 @@
-<!-- copyrighted content owned by Android Arena (www.androidarena.co.in)-->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -24,7 +23,7 @@
 
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Registro"
+                android:text="Registro otro"
                 android:textColor="#2582C5"
                 android:layout_marginLeft="25dp"
                 android:textSize="18sp"
@@ -125,15 +124,6 @@
             android:orientation="vertical"
 
             >
-
-
-
-
         </LinearLayout>
-
-
     </LinearLayout>
-
-
-
 </RelativeLayout>
