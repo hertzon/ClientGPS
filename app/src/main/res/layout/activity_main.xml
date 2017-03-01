@@ -11,18 +11,80 @@
     tools:context="com.ejemplos.nelson.clientgps.MainActivity"
     android:background="#ffffff">
 
-    <Button
-        android:layout_width="match_parent"
+    <LinearLayout android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/red_tracking_button"
-        android:text="@string/tracking_is_off"
-        android:id="@+id/trackingButton"
-        android:layout_weight="1"
-        android:height="50dip"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="100dp" />
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="30dp"
+        android:orientation="vertical"
+        android:background="#ffffff"
+        android:layout_centerInParent="false">
+
+        <TextView
+            android:text="Nombre  Equipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:id="@+id/textView_nombreEquipo"
+            android:textColor="#696969" />
+
+        <TextView
+            android:text="Imei:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView_nombreEquipo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/textView_imei"
+            android:textColor="#696969" />
+
+        <TextView
+            android:text="Longitud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView_latitud"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/textView_longitud"
+            android:textColor="#696969" />
+
+        <TextView
+            android:text="Latitud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView_latitud"
+            android:layout_below="@+id/textView_imei"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="#696969" />
+
+        <TextView
+            android:text="Exactitud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView_longitud"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/textView_exactitud"
+            android:textColor="#696969" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/red_tracking_button"
+            android:text="@string/tracking_is_off"
+            android:id="@+id/trackingButton"
+            android:layout_weight="1"
+            android:height="50dip"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="30dp" />
+
+    </LinearLayout>
+
+
 
 
 </RelativeLayout>

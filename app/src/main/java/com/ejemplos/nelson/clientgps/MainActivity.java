@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 //import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBarActivity;
@@ -21,6 +22,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -29,7 +31,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.UUID;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
     private static final String TAG = "GPSTrax";
     private String defaultUploadWebsite;
     private Button trackingButton;
@@ -45,6 +47,11 @@ public class MainActivity extends ActionBarActivity {
     public String strCorreoCuenta=null;
     public String strUsuario=null;
     public String strClave=null;
+    TextView textView_nombreEquipo;
+    TextView textView_imei;
+    TextView textView_longitud;
+    TextView textView_latitud;
+    TextView textView_exactitud;
 
 
     @Override
@@ -58,6 +65,15 @@ public class MainActivity extends ActionBarActivity {
         Log.d(TAG,"Starting Aplication GPSTrax.....");
         Log.d(TAG,"Created by Nelson Rodriguez 01/02/2017");
         Log.d(TAG,"Revisando si esta habilitado el posicionamiento...");
+
+        textView_nombreEquipo=(TextView)findViewById(R.id.textView_nombreEquipo);
+        textView_imei=(TextView)findViewById(R.id.textView_imei);
+        textView_longitud=(TextView)findViewById(R.id.textView_longitud);
+        textView_latitud=(TextView)findViewById(R.id.textView_latitud);
+        textView_exactitud=(TextView)findViewById(R.id.textView_exactitud);
+
+
+
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
             Log.d(TAG,"GPS esta activo!!!");
@@ -120,6 +136,32 @@ public class MainActivity extends ActionBarActivity {
                 trackLocation(view);
             }
         });
+        Log.d(TAG,"Activando countdown timer");
+
+
+        new CountDownTimer(30000, 5000) {
+
+            public void onTick(long millisUntilFinished) {
+                //mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);
+                //here you can have your logic to set text to edittext
+                Log.d(TAG,"onTick hecho");
+                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.websmithing.gpstracker.prefs", Context.MODE_PRIVATE);
+                textView_nombreEquipo.setText("Nombre Equipo: "+sharedPreferences.getString("nombreEquipo",null));
+                textView_imei.setText("IMEI: "+sharedPreferences.getString("imei",null));
+                textView_latitud.setText("Latitud: "+sharedPreferences.getFloat("latitud",0));
+                textView_longitud.setText("Longitud: "+sharedPreferences.getFloat("longitude",0));
+                textView_exactitud.setText("Exactitud: "+sharedPreferences.getFloat("accuracy",0));
+            }
+
+            public void onFinish() {
+                Log.d(TAG,"onFinish hecho");
+                this.start();
+            }
+
+        }.start();
+
+
+
     }
 
     private void showGPSDisabledAlertToUser() {

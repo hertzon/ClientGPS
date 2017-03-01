@@ -46,7 +46,8 @@
                 android:layout_marginTop="5dp"
                 android:textStyle="normal|bold"
                 android:textSize="24sp"
-                android:background="#ffffff" />
+                android:background="#ffffff"
+                android:textColor="#696969" />
 
             <EditText
                 android:id="@+id/editText_nombreEquipo"
@@ -57,7 +58,9 @@
                 android:paddingLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:inputType="text"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="#696969"
+                android:backgroundTint="#696969" />
 
             <TextView
                 android:text="Datos de acceso a la plataforma:"
@@ -68,7 +71,8 @@
                 android:layout_marginTop="20dp"
                 android:textStyle="normal|bold"
                 android:textSize="24sp"
-                android:background="#ffffff" />
+                android:background="#ffffff"
+                android:textColor="#696969" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -79,7 +83,9 @@
                 android:paddingLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:inputType="textEmailAddress"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="#696969"
+                android:backgroundTint="#696969" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -90,7 +96,9 @@
                 android:paddingLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:inputType="text"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="#696969"
+                android:backgroundTint="#696969" />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,7 +108,9 @@
                 android:paddingLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:inputType="textPassword"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="#696969"
+                android:backgroundTint="#696969" />
 
 
             <Button

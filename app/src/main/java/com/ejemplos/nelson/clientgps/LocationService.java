@@ -114,10 +114,20 @@ public class LocationService extends Service implements
         Log.i(TAG,"velocidadmps: "+velocidadmps);
         Log.i(TAG,"velocidadkph: "+velocidadkph);
 
-
         SharedPreferences sharedPreferences = this.getSharedPreferences("com.websmithing.gpstracker.prefs", Context.MODE_PRIVATE);
         String imei=sharedPreferences.getString("imei",null);
         Log.i(TAG,"imei from shared preferences: "+imei);
+        Log.d(TAG,"Guardando datos de posicion y demas en shared preferences..");
+        SharedPreferences.Editor editor1 = sharedPreferences.edit();
+        editor1.putString("provider",provider);
+        editor1.putFloat("bearing",bearing);
+        editor1.putFloat("accuracy",accuary);
+        editor1.putFloat("altitude",(float)altitude);
+        editor1.putFloat("latitud",(float)latitude);
+        editor1.putFloat("longitude",(float)longitude);
+        editor1.putFloat("velocidad",(float)velocidadkph);
+
+        editor1.apply();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //String timestamp = sdf.format(new Date());

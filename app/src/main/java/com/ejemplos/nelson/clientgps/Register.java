@@ -1,5 +1,6 @@
 package com.ejemplos.nelson.clientgps;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -37,7 +38,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Register extends ActionBarActivity {
+public class Register extends Activity {
     EditText editText_correoElectronico;
     EditText editText_usuario;
     EditText editText_contrasena;
@@ -172,6 +173,11 @@ public class Register extends ActionBarActivity {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     Toast.makeText(Register.this, "Registro exitoso, revise su correo electronico!", Toast.LENGTH_SHORT).show();
+                            if (done){
+                                finish();
+                            }
+
+
                                 }
                             });
                             AlertDialog ad=ab1.create();
@@ -279,7 +285,10 @@ public class Register extends ActionBarActivity {
                 editor.putString("usuario",strUsuario);
                 editor.putString("clave",strContrasena);
                 editor.apply();
-                finish();
+
+
+
+
             }
             //Toast.makeText(getApplicationContext(),"Registro exitoso, revise en su correo los datos de acceso!!!!",Toast.LENGTH_LONG).show();
         }
