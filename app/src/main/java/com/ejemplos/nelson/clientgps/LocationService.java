@@ -105,6 +105,8 @@ public class LocationService extends Service implements
         double longitude=location.getLongitude();
         float velocidadmps=location.getSpeed();
         float velocidadkph=velocidadmps*3.6f;
+
+
         Log.i(TAG,"provider: "+provider);
         Log.i(TAG,"bearing: "+bearing);
         Log.i(TAG,"accuary: "+accuary);
@@ -113,6 +115,10 @@ public class LocationService extends Service implements
         Log.i(TAG,"longitude: "+longitude);
         Log.i(TAG,"velocidadmps: "+velocidadmps);
         Log.i(TAG,"velocidadkph: "+velocidadkph);
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        String fechaHora=dateFormat.format(date);
 
         SharedPreferences sharedPreferences = this.getSharedPreferences("com.websmithing.gpstracker.prefs", Context.MODE_PRIVATE);
         String imei=sharedPreferences.getString("imei",null);
@@ -126,6 +132,7 @@ public class LocationService extends Service implements
         editor1.putFloat("latitud",(float)latitude);
         editor1.putFloat("longitude",(float)longitude);
         editor1.putFloat("velocidad",(float)velocidadkph);
+        editor1.putString("fechaHora",fechaHora);
 
         editor1.apply();
 
@@ -164,9 +171,9 @@ public class LocationService extends Service implements
 
 
         // formatted for mysql datetime format
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         dateFormat.setTimeZone(TimeZone.getDefault());
-        Date date = new Date(location.getTime());
+        date = new Date(location.getTime());
 
         sharedPreferences = this.getSharedPreferences("com.websmithing.gpstracker.prefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

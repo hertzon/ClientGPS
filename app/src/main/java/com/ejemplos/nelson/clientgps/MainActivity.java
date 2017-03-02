@@ -14,20 +14,14 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 //import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.ActionBarActivity;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.UUID;
 
@@ -52,6 +46,7 @@ public class MainActivity extends Activity {
     TextView textView_longitud;
     TextView textView_latitud;
     TextView textView_exactitud;
+    TextView textView_fechaHora;
 
 
     @Override
@@ -71,6 +66,7 @@ public class MainActivity extends Activity {
         textView_longitud=(TextView)findViewById(R.id.textView_longitud);
         textView_latitud=(TextView)findViewById(R.id.textView_latitud);
         textView_exactitud=(TextView)findViewById(R.id.textView_exactitud);
+        textView_fechaHora=(TextView)findViewById(R.id.textView_fechaHora);
 
 
 
@@ -150,7 +146,8 @@ public class MainActivity extends Activity {
                 textView_imei.setText("IMEI: "+sharedPreferences.getString("imei",null));
                 textView_latitud.setText("Latitud: "+sharedPreferences.getFloat("latitud",0));
                 textView_longitud.setText("Longitud: "+sharedPreferences.getFloat("longitude",0));
-                textView_exactitud.setText("Exactitud: "+sharedPreferences.getFloat("accuracy",0));
+                textView_exactitud.setText("Exactitud: "+sharedPreferences.getFloat("accuracy",0)+" m");
+                textView_fechaHora.setText("Fecha y Hora ultimo reporte: "+sharedPreferences.getString("fechaHora","NA"));
             }
 
             public void onFinish() {

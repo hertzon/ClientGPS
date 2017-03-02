@@ -22,12 +22,23 @@
         android:layout_centerInParent="false">
 
         <TextView
+            android:text="Localizador Movil GPS Trax"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            android:textSize="28sp"
+            android:textColor="#696969"
+            android:gravity="center_vertical|center_horizontal" />
+
+        <TextView
             android:text="Nombre  Equipo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
             android:id="@+id/textView_nombreEquipo"
-            android:textColor="#696969" />
+            android:textColor="#696969"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp" />
 
         <TextView
             android:text="Imei:"
@@ -37,7 +48,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:id="@+id/textView_imei"
-            android:textColor="#696969" />
+            android:textColor="#696969"
+            android:textSize="18sp" />
 
         <TextView
             android:text="Latitud"
@@ -47,7 +59,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:id="@+id/textView_latitud"
-            android:textColor="#696969" />
+            android:textColor="#696969"
+            android:textSize="18sp" />
 
         <TextView
             android:text="Longitud"
@@ -57,7 +70,8 @@
             android:layout_below="@+id/textView_imei"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textColor="#696969" />
+            android:textColor="#696969"
+            android:textSize="18sp" />
 
         <TextView
             android:text="Exactitud"
@@ -67,14 +81,16 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:id="@+id/textView_exactitud"
-            android:textColor="#696969" />
+            android:textColor="#696969"
+            android:textSize="18sp" />
 
         <TextView
             android:text="Fecha Hora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView_fechaHora"
-            android:textColor="#696969" />
+            android:textColor="#696969"
+            android:textSize="18sp" />
 
         <Button
             android:layout_width="match_parent"
@@ -87,7 +103,9 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="20dp"
+            android:textColor="#ffffff"
+            android:textSize="24sp" />
 
     </LinearLayout>
 

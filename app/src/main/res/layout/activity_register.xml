@@ -1,57 +1,40 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollView1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
+
     <LinearLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#faa519"
+        android:background="#ffffff"
         android:orientation="vertical"
-        >
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="48dp"
-            android:background="#e8e8e7"
-            android:orientation="horizontal"
-            android:layout_alignParentTop="true">
-
-
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Registro otro"
-                android:textColor="#2582C5"
-                android:layout_marginLeft="25dp"
-                android:textSize="18sp"
-                android:textStyle="bold"
-
-                android:layout_gravity="center_vertical|center_horizontal|center"/>
-
-
-        </LinearLayout>
-
+        <TextView
+            android:text="REGISTRO"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:gravity="center_vertical|center_horizontal"
+            android:textSize="22sp"
+            android:layout_marginTop="5dp"
+            android:textStyle="normal|bold"
+            android:textColor="#696969"
+            android:background="#ffffff" />
 
         <LinearLayout android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="30dp"
             android:orientation="vertical"
-            android:background="@drawable/greybackground"
-            android:weightSum="1">
+            android:background="#ffffff">
 
-            <ImageView android:layout_width="144dp"
-                android:id="@+id/logo"
-                android:layout_height="70dp"
-                android:background="@drawable/logotransparente"
-                android:layout_marginTop="15dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="0.10" />
 
             <TextView
                 android:text="Nombre del equipo en plataforma:"
@@ -59,17 +42,24 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/textView"
                 android:layout_weight="0.11"
-                android:layout_marginTop="20dp"
-                android:textSize="18sp" />
+                android:layout_marginTop="5dp"
+                android:textStyle="normal|bold"
+                android:background="#ffffff"
+                android:textColor="#696969" />
 
-            <EditText android:layout_width="fill_parent"
+            <EditText
                 android:id="@+id/editText_nombreEquipo"
-                android:layout_height="40dp"
                 android:hint="Nombre de equipo en plataforma"
-                android:background="#f3f3f3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+
                 android:paddingLeft="5dp"
-                android:layout_marginTop="15dp"
-                android:inputType="text" />
+                android:layout_marginTop="5dp"
+                android:inputType="text"
+                android:textSize="12sp"
+                android:textColor="#696969"
+                android:backgroundTint="#696969" />
 
             <TextView
                 android:text="Datos de acceso a la plataforma:"
@@ -78,52 +68,60 @@
                 android:id="@+id/textView5"
                 android:layout_weight="0.11"
                 android:layout_marginTop="20dp"
-                android:textSize="18sp" />
+                android:textStyle="normal|bold"
+                android:background="#ffffff"
+                android:textColor="#696969" />
 
-            <EditText android:layout_width="fill_parent"
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
                 android:id="@+id/editText_correoElectronico"
-                android:layout_height="40dp"
                 android:hint="Correo electrónico (Cuenta)"
-                android:background="#f3f3f3"
                 android:paddingLeft="5dp"
-                android:layout_marginTop="20dp"
-                android:inputType="textEmailAddress" />
+                android:layout_marginTop="5dp"
+                android:inputType="textEmailAddress"
+                android:textSize="12sp"
+                android:textColor="#696969"
+                android:backgroundTint="#696969" />
 
-            <EditText android:layout_width="fill_parent"
-                android:id="@+id/editText_usuario"
-                android:layout_height="40dp"
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
                 android:hint="Usuario"
-                android:background="#f3f3f3"
+                android:id="@+id/editText_usuario"
                 android:paddingLeft="5dp"
-                android:layout_marginTop="15dp"
-                android:inputType="text" />
-            <EditText android:layout_width="fill_parent"
+                android:layout_marginTop="5dp"
+                android:inputType="text"
+                android:textSize="12sp"
+                android:textColor="#696969"
+                android:backgroundTint="#696969" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
                 android:id="@+id/editText_contrasena"
-                android:layout_height="40dp"
                 android:hint="Contraseña"
-                android:background="#f3f3f3"
                 android:paddingLeft="5dp"
-                android:layout_marginTop="15dp"
-                android:inputType="textPassword" />
+                android:layout_marginTop="5dp"
+                android:inputType="textPassword"
+                android:textSize="12sp"
+                android:textColor="#696969"
+                android:backgroundTint="#696969" />
 
 
             <Button
                 android:id="@+id/button_registrarse"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
-                android:text="Registrarse"
-                android:textColor="#fff"
-                android:background="@drawable/btn"
-                android:layout_height="50dp"
-                android:layout_width="220dp" />
+                android:layout_marginTop="40dp"
+                android:text="Registarse"
+                android:textColor="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="#696969" />
 
-        </LinearLayout>
-
-        <LinearLayout android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-
-            >
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

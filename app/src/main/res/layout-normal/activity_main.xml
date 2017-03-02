@@ -22,12 +22,22 @@
         android:layout_centerInParent="false">
 
         <TextView
+            android:text="Localizador Movil GPS Trax"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            android:textSize="22sp"
+            android:textColor="#696969"
+            android:gravity="center_vertical|center_horizontal" />
+
+        <TextView
             android:text="Nombre  Equipo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
             android:id="@+id/textView_nombreEquipo"
-            android:textColor="#696969" />
+            android:textColor="#696969"
+            android:layout_marginTop="10dp" />
 
         <TextView
             android:text="Imei:"
@@ -87,7 +97,8 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="20dp"
+            android:textColor="#ffffff" />
 
     </LinearLayout>
 
