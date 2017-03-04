@@ -1,4 +1,4 @@
-package com.ejemplos.nelson.clientgps;
+package com.ejemplos.nelson.GPSTrax;
 
 import android.util.Log;
 

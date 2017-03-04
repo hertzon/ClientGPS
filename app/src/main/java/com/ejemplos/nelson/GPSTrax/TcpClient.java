@@ -1,9 +1,6 @@
-package com.ejemplos.nelson.clientgps;
+package com.ejemplos.nelson.GPSTrax;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.*;
 import java.net.InetAddress;
