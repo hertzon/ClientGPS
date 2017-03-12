@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">GPS Trax</string>
+    <string name="app_name">Localizador de moviles GPS</string>
     <string name="default_upload_website">https://www.websmithing.com/gpstracker/updatelocation.php</string>
 
     <string name="tracking_is_off">Tracking is Off</string>
@@ -15,4 +15,5 @@
     <string name="one_minute">1 minute</string>
     <string name="five_minutes">5 minutes</string>
     <string name="fifteen_minutes">15 minutes</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

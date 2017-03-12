@@ -3,6 +3,7 @@ package com.ejemplos.nelson.GPSTrax;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
+
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,7 +14,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
-//import android.support.v7.app.AppCompatActivity;
+
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,10 +24,20 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 
 import java.util.UUID;
 
-public class MainActivity extends Activity {
+//import static com.ejemplos.nelson.GPSTrax.R.id.map;
+
+public class MainActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final String TAG = "GPSTrax";
     private String defaultUploadWebsite;
     private Button trackingButton;
@@ -47,6 +59,8 @@ public class MainActivity extends Activity {
     TextView textView_latitud;
     TextView textView_exactitud;
     TextView textView_fechaHora;
+    int prescaler=0;
+    private GoogleMap mMap;
 
 
     @Override
@@ -68,6 +82,10 @@ public class MainActivity extends Activity {
         textView_exactitud=(TextView)findViewById(R.id.textView_exactitud);
         textView_fechaHora=(TextView)findViewById(R.id.textView_fechaHora);
 
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.mapa);
+        mapFragment.getMapAsync(this);
 
 
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -138,6 +156,9 @@ public class MainActivity extends Activity {
         new CountDownTimer(30000, 5000) {
 
             public void onTick(long millisUntilFinished) {
+                double latitud;
+                double longitud;
+                String nombreEquipo;
                 //mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);
                 //here you can have your logic to set text to edittext
                 Log.d(TAG,"onTick hecho");
@@ -148,6 +169,15 @@ public class MainActivity extends Activity {
                 textView_longitud.setText("Longitud: "+sharedPreferences.getFloat("longitude",0));
                 textView_exactitud.setText("Exactitud: "+sharedPreferences.getFloat("accuracy",0)+" m");
                 textView_fechaHora.setText("Fecha y Hora ultimo reporte: "+sharedPreferences.getString("fechaHora","NA"));
+                prescaler=0;
+                latitud=sharedPreferences.getFloat("latitud",0);
+                longitud=sharedPreferences.getFloat("longitude",0);
+                nombreEquipo=sharedPreferences.getString("nombreEquipo",null);
+
+                LatLng posicion = new LatLng(latitud, longitud);
+                mMap.addMarker(new MarkerOptions().position(posicion).title(nombreEquipo));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(posicion));
+                mMap.moveCamera(CameraUpdateFactory.zoomTo(17));
             }
 
             public void onFinish() {
@@ -323,5 +353,16 @@ public class MainActivity extends Activity {
         editor.apply();
         Log.d(TAG,"chao!!!!");
         super.onDestroy();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        UiSettings uiSettings=mMap.getUiSettings();
+        uiSettings.setZoomControlsEnabled(true);
+        LatLng sydney = new LatLng(0, 0);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("UTC"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }

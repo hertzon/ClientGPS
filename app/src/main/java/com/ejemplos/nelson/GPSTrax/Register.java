@@ -165,21 +165,20 @@ public class Register extends Activity {
                             loginServer conexion=new loginServer();
                             conexion.execute();
 
-                            AlertDialog.Builder ab1=new AlertDialog.Builder(Register.this);
-                            ab1.setMessage("Registro exitoso, revise los datos de acceso en su correo electronico!");
-                            ab1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    Toast.makeText(Register.this, "Registro exitoso, revise su correo electronico!", Toast.LENGTH_SHORT).show();
-                            if (done){
-                                finish();
-                            }
+//                            AlertDialog.Builder ab1=new AlertDialog.Builder(Register.this);
+//                            ab1.setMessage("Registro exitoso, revise los datos de acceso en su correo electronico!");
+//                            ab1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialogInterface, int i) {
+//                                    Toast.makeText(Register.this, "Registro exitoso, revise su correo electronico!", Toast.LENGTH_SHORT).show();
+//                            if (done){
+//                                finish();
+//                            }
+//
+//
+//                                }
+//                            });
 
-
-                                }
-                            });
-                            AlertDialog ad=ab1.create();
-                            ad.show();
                             //Grabamos registroHecho=true
                             Log.d(TAG,"Done: "+done);
                             if (done){
@@ -283,6 +282,20 @@ public class Register extends Activity {
                 editor.putString("usuario",strUsuario);
                 editor.putString("clave",strContrasena);
                 editor.apply();
+
+                AlertDialog.Builder ab1=new AlertDialog.Builder(Register.this);
+                ab1.setMessage("Registro exitoso, revise los datos de acceso en su correo electronico!");
+                ab1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(Register.this, "Registro exitoso, revise su correo electronico!", Toast.LENGTH_SHORT).show();
+                        finish();
+
+
+                    }
+                });
+                AlertDialog ad=ab1.create();
+                ad.show();
 
 
 
